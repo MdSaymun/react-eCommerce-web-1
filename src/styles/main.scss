@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap");
+@import "componentsStyle";
+@import "mixin";
+@import "var";
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+.row {
+  margin: 0;
+}
+.section {
+  width: 95vw;
+  margin: 0 auto;
+}
+// global classes
+// home Page sytle start
+.modal-component {
+  z-index: 333;
+}
+.section_home {
+  .home-center {
+    .featured_products {
+      .product-box {
+        img {
+          max-width: 200px;
+        }
+        .info-product {
+          position: absolute;
+          left: 0;
+          z-index: 2;
+          top: 0;
+          h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: capitalize;
+          }
+        }
+      }
+    }
+    .products-overview {
+      .category-menu {
+        .category-name {
+          cursor: pointer;
+        }
+      }
+      .box-product {
+        min-height: 420px;
+        overflow: hidden;
+        box-shadow: 0 4px 13px 0px rgba(0, 0, 0, 0.2);
+        position: relative;
+        &:hover {
+          .product-info {
+            .buttons-single-product {
+              visibility: visible;
+              opacity: 1;
+              bottom: 50%;
+            }
+            .add-to-cart-btn {
+              visibility: visible;
+              opacity: 1;
+            }
+          }
+        }
+        .image {
+          min-height: 277px;
+          background-position: center 50%;
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        .product-info {
+          .buttons-single-product {
+            // background-color: $primary_color;
+            padding: 0.5rem;
+            width: 120px;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.4s;
+            position: absolute;
+            text-align: center;
+            @include dFlex(center, space-between);
+            border-radius: 20px;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            bottom: 0%;
+            button {
+              color: black;
+              background-color: white;
+              padding: 0.4rem;
+              font-size: 1.1rem;
+              &:hover {
+                background-color: $primary_color;
+                color: white;
+              }
+            }
+          }
+          .add-to-cart-btn {
+            transition: 0.4s;
+            visibility: hidden;
+            opacity: 0;
+            color: white;
+            @include dFlex();
+            &:hover {
+              background-color: rgb(39, 39, 39);
+              // color: black;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// home Page sytle end

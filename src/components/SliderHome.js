@@ -1,0 +1,64 @@
+import React, { useRef, useState } from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/swiper.min.css";
+import "swiper/components/effect-coverflow/effect-coverflow.min.css";
+import "swiper/components/pagination/pagination.min.css";
+
+// import Swiper core and required modules
+import SwiperCore, { EffectCoverflow, Pagination, Autoplay } from "swiper/core";
+
+// install Swiper modules
+SwiperCore.use([EffectCoverflow, Pagination, Autoplay]);
+
+const sliderInfo = [
+  { image: "heroBg-1.png", price: "$24.44", heading: "Men fashion", category: "Formal", btn: "Order now" },
+  { image: "heroBg-2.png", price: "$34.44", heading: "Jens fashion", category: "Formal", btn: "Order now" },
+  { image: "heroBg-3.png", price: "$44.44", heading: "Add To Cart", category: "Formal", btn: "Order now" },
+  { image: "heroBg-4.png", price: "$54.44", heading: "Men fashion", category: "Formal", btn: "Order now" },
+];
+
+export default function SliderHome() {
+  return (
+    <>
+      <Swiper
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={"auto"}
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        pagination={true}
+        loop={true}
+        // autoplay={{
+        //   delay: 5000,
+        //   disableOnInteraction: false,
+        // }}
+        className="mySwiper"
+      >
+        {sliderInfo.map((item, i) => {
+          const { image, price, heading, category, btn } = item;
+          return (
+            <SwiperSlide key={i}>
+              <div className="slide_home relative w-full h-full flex items-center bg-gray-200" style={{ backgroundImage: `url(/images/${image})` }}>
+                <div className="info-box w-1/2">
+                  <h2 className="text-3xl my-3">{price}</h2>
+                  <h1 className="text-5xl mb-4 uppercase font-bold">{heading}</h1>
+                  <h3 className="mb-2 text-2xl uppercase">{category}</h3>
+                  <button className="bg-blue-400 text-white hover:bg-gray-700 transition py-3 w-40 mt-3">{btn}</button>
+                </div>
+              </div>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </>
+  );
+}
