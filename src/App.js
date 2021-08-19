@@ -11,8 +11,8 @@ import Alert from "./components/Alert";
 import CartItems from "./components/CartItems";
 import DeleteModal from "./components/DeleteModal";
 const App = () => {
-  const { loading, state, isDeleteModal } = useGlobalContext();
-  const { alertCom, cartData } = state;
+  const { loading, state, isCartDeleteModal, isWislistDelete, removeCartItem, removeWishlist } = useGlobalContext();
+  const { alertCom } = state;
 
   if (loading) {
     return (
@@ -27,9 +27,10 @@ const App = () => {
   return (
     <Router>
       <NavbarCom />
-      {isDeleteModal && <DeleteModal />}
+      {isCartDeleteModal && <DeleteModal removeItem={removeCartItem} showModal={isCartDeleteModal} />}
+      {isWislistDelete && <DeleteModal removeItem={removeWishlist} showModal={isWislistDelete} />}
       {alertCom.showAlrt && <Alert />}
-      {cartData.length > 0 && <CartItems />}
+      <CartItems />
       <Sidebar />
       <Switch>
         {router.map((route, i) => {

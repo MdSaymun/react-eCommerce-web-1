@@ -6,8 +6,7 @@ const AlertCom = () => {
   const { alertCom } = state;
 
   return (
-    <div className="fixed top-20 z-10 right-0">
-      <h1>{alertCom.alrtMsg}</h1>
+    <div className="fixed top-28 z-10 right-0">
       <Alert variant="filled" severity={`${alertCom.alertType}`}>
         {alertCom.alrtMsg}
       </Alert>

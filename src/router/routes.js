@@ -6,6 +6,7 @@ import Cart from "../pages/Cart";
 import Wishlist from "../pages/Wishlist";
 import SingleProduct from "../pages/SingleProduct";
 import About from "../pages/About";
+import Checkout from "../pages/Checkout";
 import Error from "../pages/Error";
 const router = [
   { path: "/", exact: true, component: Home },
@@ -16,6 +17,7 @@ const router = [
   { path: "/wishlist", component: Wishlist },
   { path: "/singleproduct/:productid", component: SingleProduct },
   { path: "/about", component: About },
+  { path: "/checkout", component: Checkout },
   { path: "*", component: Error },
 ];
 

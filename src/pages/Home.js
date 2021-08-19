@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import SliderHome from "../components/SliderHome";
 import { Row, Col } from "react-bootstrap";
 import AOS from "aos";
@@ -8,7 +8,6 @@ import { animateScroll as scroll } from "react-scroll";
 import { useGlobalContext } from "../utils/context";
 import SingleProduct from "../components/SingleProduct";
 import Modal from "../components/Modal";
-
 // animation on scroll
 // fake store api
 let url = "https://fakestoreapi.com/products?limit=3";
@@ -93,7 +92,7 @@ const Home = () => {
               <h1 className="mb-3 text-2xl font-bold uppercase">Product Overview</h1>
               <div className="category-menu mb-3">
                 <Row className="items-center ">
-                  <Col md={8} className="flex">
+                  <Col md={8} className="flex flex-wrap">
                     {newCategory.map((cat, i) => {
                       return (
                         <div
@@ -102,20 +101,12 @@ const Home = () => {
                             setIndex(i);
                           }}
                           key={i}
-                          className={`category-name px-3 border py-2 mx-2 ${i === index && "bg-blue-500 text-white"}`}
+                          className={`category-name px-3 border py-2 mx-2 my-2 ${i === index && "bg-blue-500 text-white"}`}
                         >
                           {cat}
                         </div>
                       );
                     })}
-                  </Col>
-                  <Col md={4}>
-                    <div className="icon-overview">
-                      <div className="buttons">
-                        <button>Filter</button>
-                        <button>Search</button>
-                      </div>
-                    </div>
                   </Col>
                 </Row>
               </div>

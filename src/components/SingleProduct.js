@@ -5,7 +5,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { useGlobalContext } from "../utils/context";
 import { Link } from "react-router-dom";
 const SingleProduct = ({ title, price, image, id }) => {
-  const { openModal, addToCart, removeWishlist, addToWishlist, state, increment, decrement } = useGlobalContext();
+  const { openModal, addToCart, addToWishlist, state, increment, decrement, handleWishlistItem } = useGlobalContext();
   const { wishlistData, cartData } = state;
   const findItem = cartData.find((item) => item.id === id);
   return (
@@ -23,7 +23,7 @@ const SingleProduct = ({ title, price, image, id }) => {
                 <FaEye />
               </button>
               {wishlistData.find((item) => item.id === id) ? (
-                <button onClick={() => removeWishlist(id)} className="wishlist-btn-active">
+                <button onClick={() => handleWishlistItem(id)} className="wishlist-btn-active">
                   <FaHeart />
                 </button>
               ) : (

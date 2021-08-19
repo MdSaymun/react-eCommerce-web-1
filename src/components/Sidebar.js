@@ -1,6 +1,6 @@
 import React from "react";
 import { FaCodepen, FaFacebook, FaGithub, FaInstagram, FaTimes } from "react-icons/fa";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useGlobalContext } from "../utils/context";
 import { motion } from "framer-motion";
 

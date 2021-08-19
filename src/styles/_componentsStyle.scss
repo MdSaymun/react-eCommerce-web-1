@@ -20,10 +20,10 @@
     justify-content: space-between;
     @media (max-width: 1024px) {
     }
-    .nav-header {
-    }
-    .navlinks-container {
-    }
+    // .nav-header {
+    // }
+    // .navlinks-container {
+    // }
     .nav-icons {
       // border: 2px solid orangered;
       .src-box {
@@ -172,9 +172,45 @@
   .footer_center {
     .box-address {
       .phone {
-        border: 1px solid gray;
         align-items: center;
-        justify-content: center;
+        justify-content: space-evenly;
+        display: flex;
+      }
+    }
+    .footer-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      h3 {
+        font-size: 1.1rem;
+        color: #fff;
+      }
+      .link {
+        .link-menu {
+          margin-bottom: 0.8rem;
+        }
+      }
+      .page {
+        .link-page {
+          margin-bottom: 0.8rem;
+        }
+      }
+      .help {
+        p {
+          margin-bottom: 0.8rem;
+        }
+      }
+    }
+    .copyright-msg-social-link {
+      @include dFlex(center, space-between);
+      flex-direction: row;
+      @media (max-width: 850px) {
+        flex-direction: column;
+      }
+      .social-icons {
+        @media (max-width: 850px) {
+          margin-top: 1rem;
+        }
+        padding-right: 1.2rem;
       }
     }
   }

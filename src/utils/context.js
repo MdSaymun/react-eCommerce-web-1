@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
+import { reducer, initializer, initialState } from "./reducer";
 export const AppContext = React.createContext();
 const url = "https://fakestoreapi.com/products";
 const AppProvider = ({ children }) => {
@@ -28,6 +29,7 @@ const AppProvider = ({ children }) => {
     fetchData();
   }, []);
   ///
+
   // sidebar
   const openSidebar = () => {
     setIsSidebarOpen(true);
@@ -47,74 +49,13 @@ const AppProvider = ({ children }) => {
     setProductId(null);
     setIsModalOpen(false);
   };
+  //
 
-  // reducer
-  const reducer = (state, action) => {
-    if (action.type === "ADD_TO_CART") {
-      const newItem = [...new Set([...state.cartData, action.paylaod])];
-      return { ...state, cartData: newItem, alertCom: { alrtMsg: "one Item added to cart", showAlrt: true, alertType: "success" } };
-    }
-    if (action.type === "REMOVE_CART_ITEM") {
-      const newItem = state.cartData.filter((item) => action.payload !== item.id);
-      return { ...state, cartData: newItem, alertCom: { alrtMsg: "one Item deleted from cart", showAlrt: true, alertType: "error" } };
-    }
-    if (action.type === "GET_TOTAL") {
-      const totalAmount = state.cartData.reduce(
-        (itemTotal, item) => {
-          let price = item.price;
-          let amount = item.amount;
-          let totalPrice = price * amount;
-          itemTotal.amount += amount;
-          itemTotal.total += totalPrice;
-          return itemTotal;
-        },
-        { total: 0, amount: 0 }
-      );
-      let floatNum = totalAmount.total.toFixed(2);
-      return { ...state, total: floatNum, amount: totalAmount.amount };
-    }
-    if (action.type === "ADD_TO_WISHLIST") {
-      const newItem = [...new Set([...state.wishlistData, action.payload])];
-      return { ...state, wishlistData: newItem, alertCom: { alrtMsg: " item added to wishlist", showAlrt: true, alertType: "success" } };
-    }
-    if (action.type === "REMOVE_WISHLIST_ITEM") {
-      const newItem = state.wishlistData.filter((item) => action.payload !== item.id);
-      // console.log(newItem);
-      return { ...state, wishlistData: newItem, alertCom: { alrtMsg: " item remove from wishlist", showAlrt: true, alertType: "error" } };
-    }
-    if (action.type === "INCREMENT") {
-      const newItem = state.cartData.map((item) => {
-        if (item.id === action.payload) {
-          return { ...item, amount: item.amount + 1 };
-        }
-        return item;
-      });
-      return { ...state, cartData: newItem };
-    }
-    if (action.type === "DECREMENT") {
-      const newItem = state.cartData
-        .map((item) => {
-          if (item.id === action.payload) {
-            return { ...item, amount: item.amount - 1 };
-          }
-          return item;
-        })
-        .filter((item) => item.amount !== 0);
-      return { ...state, cartData: newItem };
-    }
-    if (action.type === "HIDE_ALERT") {
-      return { ...state, alertCom: { alrtMsg: "", showAlrt: false, alertType: "" } };
-    }
-    throw new Error("No Action type is match");
-  };
-  const initialState = {
-    cartData: [],
-    wishlistData: [],
-    amount: 0,
-    total: 0,
-    alertCom: { alrtMsg: "", showAlrt: false, alertType: "" },
-  };
-  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState, initializer);
+  useEffect(() => {
+    localStorage.setItem("localState", JSON.stringify(state));
+  }, [state]);
+
   /// add to cart
   const addToCart = (id) => {
     const findItem = data.find((item) => item.id === id);
@@ -123,35 +64,50 @@ const AppProvider = ({ children }) => {
   };
   // remove form cart
   const [deleteId, setDeleteId] = useState(null);
-  const [isDeleteModal, setIsDeleteModal] = useState(false);
+  const [isCartDeleteModal, setIsCartDeleteModal] = useState(false);
   const [deleteMsg, setDeleteMsg] = useState("");
+  const [isWislistDelete, setIsWislistDelete] = useState(false);
 
   const handleCartItem = (id) => {
-    setIsDeleteModal(true);
-    setDeleteMsg(`Are you want to delete ${state.cartData.find((item) => item.id === id).title}`);
+    setIsCartDeleteModal(true);
+    setDeleteMsg(`Are you want to delete ${state.cartData.find((item) => item.id === id).title} from cart`);
     setDeleteId(id);
   };
   // hideModal
   const closeDeleteModal = () => {
-    setIsDeleteModal(false);
+    setIsCartDeleteModal(false);
+    setIsWislistDelete(false);
+    setDeleteId(null);
   };
   // deleteModal
   const removeCartItem = () => {
     dispatch({ type: "REMOVE_CART_ITEM", payload: deleteId });
     closeDeleteModal();
+    setDeleteId(null);
   };
   // get Total && amount
   useEffect(() => {
     dispatch({ type: "GET_TOTAL" });
   }, [state.cartData]);
+  //wishlist
   // add to wishlist
+
   const addToWishlist = (id) => {
     const findItem = data.find((item) => item.id === id);
     dispatch({ type: "ADD_TO_WISHLIST", payload: findItem });
   };
-  const removeWishlist = (id) => {
-    dispatch({ type: "REMOVE_WISHLIST_ITEM", payload: id });
+  const removeWishlist = () => {
+    dispatch({ type: "REMOVE_WISHLIST_ITEM", payload: deleteId });
+    closeDeleteModal();
+    setDeleteId(null);
+    setIsWislistDelete(false);
   };
+  const handleWishlistItem = (id) => {
+    setIsWislistDelete(true);
+    setDeleteMsg(`Are you want to remove ${state.wishlistData.find((item) => item.id === id).title} from wishlist`);
+    setDeleteId(id);
+  };
+
   // increment and decrement
   const increment = (id) => {
     dispatch({ type: "INCREMENT", payload: id });
@@ -162,10 +118,10 @@ const AppProvider = ({ children }) => {
 
   // hide alert
   useEffect(() => {
-    let time = setInterval(() => {
+    let time = setTimeout(() => {
       dispatch({ type: "HIDE_ALERT" });
     }, 3000);
-    return () => clearInterval(time);
+    return () => clearTimeout(time);
   }, [state.cartData, state.wishlistData]);
   // show cartItems
   const [isCartItemShow, setIsCartItemShow] = useState(false);
@@ -176,12 +132,21 @@ const AppProvider = ({ children }) => {
     setIsCartItemShow(false);
   };
 
+  // add to cart singleProduct
+  const singleAddToCart = (id, value) => {
+    const findItem = data.map((item) => item.id === id && { ...item, amount: item.amount + value - 1 });
+    const newItem = findItem && findItem.find((item) => id === item.id);
+    dispatch({ type: "SINGLE_ADD_TO_CART", payload: newItem, value });
+  };
   return (
     <AppContext.Provider
       value={{
+        singleAddToCart,
+        handleWishlistItem,
         closeDeleteModal,
         deleteMsg,
-        isDeleteModal,
+        isCartDeleteModal,
+        isWislistDelete,
         handleCartItem,
         removeCartItem,
         isCartItemShow,
