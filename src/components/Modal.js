@@ -14,7 +14,7 @@ const Modal = () => {
             data.map((item) =>
               item.id === productId ? (
                 <div>
-                  <img src={item.image} alt="" className=" w-2/3 mx-auto" />
+                  <img src={item.image} alt="" className=" lg:w-2/3 w-full mx-auto" />
                 </div>
               ) : null
             )}

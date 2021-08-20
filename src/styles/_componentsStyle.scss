@@ -61,6 +61,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    @media (max-width: 550px) {
+      width: 80%;
+    }
   }
 }
 // modal style end
@@ -75,6 +78,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    @media (max-width: 550px) {
+      width: 80%;
+    }
   }
 }
 
@@ -83,6 +89,10 @@
 
 .cartItems-container {
   z-index: 111;
+  @media (max-width: 550px) {
+    width: 100%;
+    right: 0;
+  }
   .cartItem-box {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -97,9 +107,10 @@
   background-repeat: no-repeat;
   object-fit: cover;
   @media (max-width: 850px) {
-    background-position: 0% 32%;
-    background-size: 133%;
+    background-position: center;
+    background-size: cover;
   }
+
   .info-box {
     position: relative;
     width: 1140px;
@@ -173,7 +184,7 @@
     .box-address {
       .phone {
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: center;
         display: flex;
       }
     }

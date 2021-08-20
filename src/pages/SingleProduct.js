@@ -14,7 +14,7 @@ const SingleProduct = () => {
   const { image, price, title, description, category, id } = findItem;
   const [value, setValue] = useState(1);
   return (
-    <div className="section_singleProduct py-20">
+    <div className="section_singleProduct_page py-20">
       <div className="section md:container">
         <div className="single-product mt-20 w-full">
           <Row>
@@ -32,7 +32,7 @@ const SingleProduct = () => {
                 <p className="w-2/3 text-gray-600 mb-3">{description}</p>
                 <h2 className="text-2xl mb-3 font-bold">${price}</h2>
               </div>
-              <div className="buttons-single-productsPage grid grid-cols-3">
+              <div className="buttons-single-productsPage items-center ">
                 <div className="increment-decrement-input">
                   <button disabled={value < 2 ? true : false} className="item-decrement p-1  bg-gray-100 rounded-l-sm text-lg" onClick={() => setValue(+value - 1)}>
                     -
@@ -48,7 +48,7 @@ const SingleProduct = () => {
                 >
                   <FiShoppingCart className="mr-2 cursor-pointer" /> Add to cart
                 </button>
-                <div className="is-item-wishlist">
+                <div className="is-item-wishlist px-4">
                   {wishlistData.find((item) => item.id === id) ? (
                     <button onClick={() => handleWishlistItem(id)} className="wishlist-btn-active">
                       <FaHeart />

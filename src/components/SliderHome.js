@@ -23,6 +23,7 @@ function SliderHome() {
   const [sliderIndex, setSliderIndex] = React.useState(0);
   const [changeIndex, setChangeIndex] = React.useState(5);
   // console.log(sliderIndex);
+  console.log(changeIndex);
 
   return (
     <>
@@ -52,8 +53,8 @@ function SliderHome() {
           const { image, price, heading, category, btn } = item;
           return (
             <SwiperSlide key={i}>
-              <div className="slide_home relative w-full h-full flex items-center bg-gray-200" style={{ backgroundImage: `url(/images/${image})` }}>
-                <div className="info-box w-1/2">
+              <div className="slide_home relative w-full h-full flex items-center md:bg-gray-200 bg-gray-900 bg-opacity-60 " style={{ backgroundImage: `url(/images/${image})` }}>
+                <div className="info-box w-1/2 md:text-gray-900 text-gray-50">
                   <h2 className="text-3xl my-3">{price}</h2>
                   {changeIndex ? (
                     <Fade left when={i === changeIndex - 4 || i === changeIndex - 8}>

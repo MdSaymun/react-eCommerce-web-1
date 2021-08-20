@@ -15,7 +15,7 @@ const SingleProduct = ({ title, price, image, id }) => {
           <div className="image" style={{ backgroundImage: `url(${image})` }}></div>
           <div className="product-info mt-3">
             <Link to={`/singleproduct/${id}`}>
-              <h3 className="font-bold mb-2 text-lg hover:text-blue-600">{title}</h3>
+              <h3 className="font-bold mb-2 text-lg hover:text-blue-600">{title.substring(0, 15)}</h3>
             </Link>
             <small className="text-base">${price}</small>
             <div className="buttons-single-product">
@@ -34,18 +34,18 @@ const SingleProduct = ({ title, price, image, id }) => {
             </div>
             <div className="buttons-product">
               {cartData.find((item) => item.id === id) ? (
-                <div className="buttons-inc-dec-input flex items-center justify-center">
-                  <button onClick={() => decrement(id)} className="decrement p-2 bg-gray-100">
+                <div className="buttons-inc-dec-input flex items-center w-1/2 mx-auto justify-center bg-gray-100">
+                  <button onClick={() => decrement(id)} className="decrement p-2 ">
                     <FaMinus />
                   </button>
                   <div className="p-2">{findItem && findItem.amount}</div>
-                  <button onClick={() => increment(id)} className="increment p-2 bg-gray-100">
+                  <button onClick={() => increment(id)} className="increment p-2 ">
                     <FaPlus />
                   </button>
                 </div>
               ) : (
-                <button onClick={() => addToCart(id)} className="add-to-cart-btn text-center bg-blue-500 py-1 px-4 mx-auto rounded-full">
-                  <span className="mr-2">Add To Cart</span> <FiShoppingCart />
+                <button onClick={() => addToCart(id)} className="add-to-cart-btn my-2 text-center bg-blue-500 py-1 px-4 mx-auto rounded-full">
+                  <span className="mr-2 my-1">Add To Cart</span> <FiShoppingCart />
                 </button>
               )}
             </div>

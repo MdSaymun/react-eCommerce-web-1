@@ -8,7 +8,7 @@ const CartItems = () => {
 
   return (
     <div
-      className={`cartItems-container shadow-xl fixed w-96 right-10 z-50 bg-white p-3 px-4 top-14 transition
+      className={`cartItems-container shadow-xl fixed lg:w-96 lg:right-10 right-3 bg-white p-3 px-4 top-14 transition
      ${isCartItemShow ? "visible opacity-100" : "invisible opacity-0"}`}
     >
       {cartData.length < 1 ? (
@@ -19,8 +19,8 @@ const CartItems = () => {
             return (
               <Col key={i}>
                 <div className="cartItem-box py-2 ">
-                  <div className="cart-item-image mr-3">
-                    <img src={item.image} className="w-14" alt="" />
+                  <div className="cart-item-image mr-3 lg:block hidden">
+                    <img src={item.image} className="w-14 " alt="" />
                   </div>
                   <div className="info-cart-item">
                     <h4 className="mb-1">{item.title}</h4>
@@ -36,7 +36,7 @@ const CartItems = () => {
             );
           })}
           <hr className="mt-2" />
-          <div className="subtotal-cartItems flex items-center justify-between">
+          <div className="subtotal-cartItems flex items-center justify-evenly lg:justify-between">
             <h4 className="font-semibold">SubTotal:</h4>
             <span className="font-bold">${total}</span>
           </div>

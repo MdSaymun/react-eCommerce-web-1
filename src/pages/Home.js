@@ -62,7 +62,7 @@ const Home = () => {
   return (
     <>
       <div className="section_home" onMouseOver={hideCartItems}>
-        <div className="slider-home-center h-screen">
+        <div className="slider-home-center lg:h-screen ">
           <div className="slider-home h-full">
             <SliderHome />
           </div>

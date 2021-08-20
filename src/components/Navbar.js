@@ -33,7 +33,9 @@ const NavbarCom = () => {
           <button className="block lg:hidden text-xl border rounded-sm p-2" onClick={openSidebar}>
             <FaBars />
           </button>
-          <h1 className="text-2xl py-3 hidden lg:block">My Store</h1>
+          <h1 className="text-2xl py-3 hidden lg:block">
+            <Link to="/">My Store</Link>
+          </h1>
         </div>
         <div className="navlinks-container">
           <ul className="lg:flex items-center justify-center hidden">

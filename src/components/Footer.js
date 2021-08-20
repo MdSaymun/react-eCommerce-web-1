@@ -6,18 +6,18 @@ const Footer = () => {
     <section className="section_footer py-20 text-white bg-gray-700">
       <div className="section md:container footer_center">
         <Row>
-          <Col md={4} className="pb-4 lg:pb-0">
+          <Col md={3} className="pb-4 lg:pb-0">
             <div className="box-address">
               <h3 className="text-2xl mb-3">My Store</h3>
-              <div className="phone py-2 px-2 mb-3 xl:w-1/2 md:w-3/4 w-1/3 rounded-sm border">
-                <FaPhone />
+              <div className="phone lg:w-4/5 py-2 px-2 mb-3 justify-center rounded-sm border">
+                <FaPhone className="mx-2" />
                 <div className="to-gray-400">1-800-312-2121</div>
               </div>
               <p className="text-sm text-gray-400">555 California str, Suite 100</p>
               <p className="text-sm text-gray-400">San Francisco, CA 27403</p>
             </div>
           </Col>
-          <Col md={8} className="pb-4 lg:pb-0">
+          <Col md={9} className="pb-4 lg:pb-0">
             <div className="footer-links text-gray-300 text-sm">
               <div className="link">
                 <h3 className="mb-3">Our Menu</h3>
