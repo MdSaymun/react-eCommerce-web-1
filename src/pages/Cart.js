@@ -32,7 +32,7 @@ const Cart = () => {
                     const findItem = cartData.find((item) => item.id === id);
                     return (
                       <Col key={i} xs className=" mb-3 p-0">
-                        <div className="box-cart-item items-center md:grid-cols-4 grid-cols-3  w-full border">
+                        <div className="box-cart-item items-center md:grid-cols-4 grid-cols-3  w-full">
                           <div className="image-cart-item-delete-btn flex items-center">
                             <button className="px-2 py-1 md:mx-2 text-red-500 md:text-2xl font-bold" onClick={() => handleCartItem(id)}>
                               <FaTimes />
