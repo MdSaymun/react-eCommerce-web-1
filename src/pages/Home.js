@@ -78,7 +78,7 @@ const Home = () => {
                     <Col lg={4} md={6} key={i}>
                       <div className="product-box relative p-4">
                         <img src={image} alt="" className="mx-auto" />
-                        <div className="info-product">
+                        <div className="info-product ">
                           <h3 className="mb-2">{trend}</h3>
                           <h4 className="mb-2 text-gray-600 capitalize">{category}</h4>
                         </div>

@@ -24,6 +24,10 @@ a:hover {
   z-index: 333;
 }
 .section_home {
+  .slider-home-center {
+    @media (max-width: 550px) {
+    }
+  }
   .home-center {
     .featured_products {
       .product-box {
